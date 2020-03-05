@@ -10,7 +10,7 @@ public class MovieTicketBookingApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(MovieTicketBookingApplication.class, args);
-		System.out.println("hgjijigf");
+		System.out.println("code is running sucessfully");
 	}
 
 }

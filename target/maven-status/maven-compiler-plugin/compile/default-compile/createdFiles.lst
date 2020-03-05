@@ -1,3 +1,4 @@
+com\model\Login.class
 com\service\TicketService.class
 com\controller\TicketController.class
 com\example\demo\MovieTicketBookingApplication.class

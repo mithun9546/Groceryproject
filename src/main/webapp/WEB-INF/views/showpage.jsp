@@ -1,75 +1,162 @@
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<!DOCTYPE html>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" isELIgnored="false"%>
 
+<html lang="en">
+<head>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<body style="background-color:lavender">
-<h1><center> User Resgistration Form</center></h1>
-<h2 style = "color:red"> <center>${Error}</center></h2>
-<center><form:form method="POST" action="/calculateCost" modelAttribute="ticket">
+<style>
+.form-horizontal{
+  background-color: #EAEAEA;}
+  .col-sm-3 control-label{
+  background-color: #EAEAEA;
+  }
+  </style>
 
+	<!-- Access the bootstrap Css like this, 
+		Spring boot will handle the resource mapping automcatically -->
+	<link rel="stylesheet" type="text/css" href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
 
-              <table>
-              <tr>
-              	<td><sf:label path="firstName">First Name</sf:label></td>
-              	<td><sf:input path="firstName" id="firstName" placeholder="Enter first name" required = "required"/></td>
-              
-              </tr><tr>
-              	<td><sf:label path="lastName">Last  Name</sf:label></td>
-              	<td><sf:input path="lastName" id="lastName" placeholder="Enter last name"/></td>
-              
-              </tr>
-             <tr>
-              	<td><sf:label path="dob">Date Of Birth</sf:label></td>
-              	<td><sf:input type = "date" path="dob" id="dob" /></td>
-              
-              </tr>
-              <tr>
-              	<td>Gender</td>
-              	<td><input type = "radio" name="gender"  path="gender" value = "male"/>Male
-              		<input type = "radio"  name="gender"   path="gender" value = "Female"/>Female</td>
-              
-              </tr>
-              
-
-              	
-
-			
-			<tr>
-				<td><sf:label path="Contact">Contact Number</sf:label></td>
-				<td><sf:input type = "tel" path ="Contact" id="Contact" placeholder = "Enter your Contact"/></td>
-			</tr>
-			<tr>
-				<td><sf:label path="Email">EmailId</sf:label></td>
-				<td><sf:input type = "email"  path ="Email" id="Email" placeholder="Enter Email"/></td>
-			</tr>
-			<tr>
-              	<td><sf:label path="password">Password</sf:label></td>
-              	<td><sf:input type = "password" path="password" id="password" placeholder="Enter password"/></td>
-              
-              </tr>
-              <tr>
-              	<td><sf:label path="cpassword">Confirm Password</sf:label></td>
-              	<td><sf:input type = "password" path="cpassword" id="cpassword" placeholder="Enter Confirm password"/></td>
-              	      
-               <td><p style = "color:red"> ${passerror} </p></td>
-      </tr>
-			
-			
-			<tr>
-				<td><input type="submit" value="Submit" id="submit"
-					name="submit"></td>
-				
-			</tr>
-		</table>
+	<!-- 
+	<spring:url value="/css/main.css" var="springCss" />
+	<link href="${springCss}" rel="stylesheet" />
+	 -->
+	<c:url value="/css/main.css" var="jstlCss" />
+	<link href="${jstlCss}" rel="stylesheet" />
 	
-</form:form></center>
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+</head>
+<body>
 
 
+
+	<!-- <nav class="navbar navbar-inverse">
+		<div class="container">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">Grocery Management</a>
+			</div>
+			<div id="navbar" class="collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="#">Home</a></li>
+					<li><a href="#about">About</a></li>
+					<li><a href="#about">Help</a></li>
+					<li><a href="#about">Logout</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav> -->
+	<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/regist">Grocerry Shopping</a>
+    </div>
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/login">Login</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#">Home</a></li>
+    </ul>
+    <form class="navbar-form navbar-left" action="#">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search" name="search">
+        <div class="input-group-btn">
+          <button class="btn btn-default" type="submit">
+            <i class="glyphicon glyphicon-search"></i>
+          </button>
+        </div>
+      </div>
+    </form>
+     <div class="navbar-header">
+      <a class="navbar-brand" href="/adminlogin">Admin Login</a>
+    </div>
+  </div>
+</nav>
+
+
+
+
+<div class="container">
+            <form:form class="form-horizontal" role="form"  method="POST" action="/userdata" modelAttribute="ticket" >
+                <h2>Registration</h2>
+				<h2 style = "color:red"> <center>${Error}</center></h2>
+                <div class="form-group">
+                    <sf:label for="firstName" path="firstName" class="col-sm-3 control-label">First Name</sf:label>
+                    <div class="col-sm-9">
+                        <sf:input type="text" path="firstName" id="firstName" placeholder="First Name" class="form-control"  />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <sf:label for="lastName" path="lastName" class="col-sm-3 control-label">Last Name</sf:label>
+                    <div class="col-sm-9">
+                        <sf:input type="text" id="lastName" path="lastName" placeholder="Last Name" class="form-control"  />
+                    </div>
+                </div>
+				 <div class="form-group">
+                    <sf:label for="birthDate" path="dob" class="col-sm-3 control-label">Date of Birth*</sf:label>
+                    <div class="col-sm-9">
+                        <sf:input type="date" path="dob" id="birthDate" class="form-control" />
+                    </div>
+                </div>
+                   <div class="form-group">
+                    <sf:label class="control-label col-sm-3" path="gender">Gender</sf:label>
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <sf:label class="radio-inline" path="gender">
+                                    <sf:radiobuttons  path="gender" items="${radio }" />
+                                </sf:label>
+                            </div>
+                        
+                        </div>
+                    </div>
+                </div>
+				  <div class="form-group">
+                    <sf:label for="phoneNumber" path="Contact" class="col-sm-3 control-label">Phone number </sf:label>
+                    <div class="col-sm-9">
+                        <sf:input type="phoneNumber" id="phoneNumber" path="Contact" placeholder="Phone number" class="form-control" />
+                        <span class="help-block">Your phone number won't be disclosed anywhere </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <sf:label for="email" path="Email"  class="col-sm-3 control-label">Email* </sf:label>
+                    <div class="col-sm-9">
+                        <sf:input type="email" id="email" path="Email"  placeholder="Email" class="form-control" name= "email" />
+                    </div>
+                </div>
+               
+                <div class="form-group">
+                    <sf:label for="password" path="password" class="col-sm-3 control-label">Password*</sf:label>
+                    <div class="col-sm-9">
+                        <sf:input type="password" path="password" id="password" placeholder="Password" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <sf:label for="password" path="cpassword" class="col-sm-3 control-label">Confirm Password*</sf:label>
+                    <div class="col-sm-9">
+                        <sf:input type="password"  path="cpassword" id="password" placeholder="Password" class="form-control" />
+						<p style = "color:red"> ${passerror} </p>
+                    </div>
+                </div>
+             
+               <!-- /.form-group -->
+                <div class="form-group">
+                    <div class="col-sm-9 col-sm-offset-3">
+                        <span class="help-block">*Required fields</span>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Register</button>
+            </form:form> 
+            <!-- /form -->
+        </div> <!-- ./container -->
 </body>
-</html>	 
+</html>
