@@ -1,0 +1,4 @@
+com\service\TicketService.class
+com\controller\TicketController.class
+com\example\demo\MovieTicketBookingApplication.class
+com\model\Ticket.class
