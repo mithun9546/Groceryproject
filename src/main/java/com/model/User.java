@@ -1,28 +1,37 @@
 package com.model;
 
-import javax.validation.constraints.NotNull;
+/*import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Component;*/
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
-public class Ticket {
-	@NotNull
+import org.springframework.stereotype.Component;
+@Component
+public class User {
+	@NotEmpty(message = "Gender is required")
 	private String gender;
-	@NotNull
+	@NotEmpty(message = "Dob  is required")
 	private String dob;
-	@NotNull
+	
 	private String cpassword;
-	@Size(min=2, max=30)
-	@NotNull
+	
+	@NotEmpty(message = "First Name is required")
 	private String firstName;
-	@NotNull
+	@NotEmpty(message = "Phone Number is required")
+	@Pattern(regexp = "^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$", message = "Mobile number is invalid")
 	private String Contact;
-	@Size(min=2, max=30)
+	@NotEmpty(message = "Last Name is required")
 	private String lastName;
-	@NotNull
+	@NotEmpty(message = "Email is required")
+	@Email
 	private String Email;
-	@NotNull
+	@NotEmpty(message="Password not be less than 8 character")
+	@Size(min = 8, max = 64)
 	private String password;
 
 	public String getGender() {

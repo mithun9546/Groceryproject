@@ -1,5 +1,6 @@
 com\model\Login.class
 com\service\TicketService.class
-com\controller\TicketController.class
-com\example\demo\MovieTicketBookingApplication.class
-com\model\Ticket.class
+com\example\demo\GroceryMainApplication.class
+com\controller\UserController.class
+com\model\AdminLogin.class
+com\model\User.class
