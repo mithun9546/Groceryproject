@@ -1,22 +1,31 @@
 package com.controller;
 
+import java.io.IOException;
 import java.util.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+//import org.onlineshoppingportal.exceptions.ProductOutOfStockException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import com.service.ProductOrder;
 import com.service.TicketService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.model.Login;
+import com.model.Product;
 import com.model.User;
 import com.model.AdminLogin;;
 
@@ -27,6 +36,9 @@ public class UserController {
 	private TicketService ticketService;
 	@Autowired
 	JdbcTemplate jdbc;
+	@Autowired
+	private ProductOrder productOrder;
+
 
 	@ModelAttribute("radio")
 	public List<String> radioOptions() {
@@ -35,7 +47,69 @@ public class UserController {
 		radio.add("Female");
 		return radio;
 	}
+	@RequestMapping(value = "/fetch")
+	public ModelAndView listProduct(ModelAndView model) throws IOException {
 
+		List<Product> listProduct = productOrder.prodList();
+		model.addObject("listProduct", listProduct);
+		model.setViewName("productshow");
+		System.out.println("hii");
+
+		return model;
+	}
+	
+	
+/*	@RequestMapping(value="/buyProduct")
+	//@ResponseBody
+	public String buyProduct(Model model, @RequestParam(value = "ItemId", defaultValue = "") String ItemId){
+		if(ItemId.isEmpty())
+    	{
+    		return "redirect:/productList";
+    	}
+		 Product product = null;
+		 if (ItemId != null && ItemId.length() > 0) {
+	            //product = product.getItemId(ItemId);
+	        }
+		else
+			return "sucessful";
+	}*/
+	
+	 /*@RequestMapping({ "/buyProduct" })
+	    public String buyProduct(Model model, @RequestParam(value = "code", defaultValue = "") String code) {
+	    	if(code.isEmpty())
+	    	{
+	    		return "redirect:/productList";
+	    	}
+	    	
+	        Product product = null;
+	        if (code != null && code.length() > 0) {
+	            product = productDAO.findProduct(code);
+	        }
+	        if (product != null) {
+	        	if(product.getQuantity() == 0)
+	        	{	
+					logger.error("Product out of stock having code "+code);
+	        		throw new ProductOutOfStockException();
+	        	}
+	        	model.addAttribute("product",product);
+	        }
+	    	else
+	        return "confirmation";
+	    }*/
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	/*@RequestMapping(value = "/admin", method = RequestMethod.GET)
@@ -61,7 +135,6 @@ public class UserController {
 	
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public String showPage() {
-		
 		return "home";
 	}
 	
